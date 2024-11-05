@@ -15,7 +15,7 @@ export const GET:RequestHandler=async({url,cookies,fetch})=>{
         throw error(400, "State Mismatch!");
     }
 
-    const response = await fetch('https://accounts.spotify.com/api/tokens',{
+    const response = await fetch('https://accounts.spotify.com/api/token',{
         method:'POST',
         headers:{
             'Content-Type':'application/x-www-form-urlencoded',
@@ -24,8 +24,8 @@ export const GET:RequestHandler=async({url,cookies,fetch})=>{
         body: new URLSearchParams({
             code:code || '',
             redirect_uri : `${APP_URL}/api/auth/callback`,
-            grant_type:'authoraization_code',
-            code_cverifier:storedChallengeVerifier || '',
+            grant_type:'authorization_code',
+            code_verifier:storedChallengeVerifier || '',
             client_id: SPOTIFY_APP_CLIENT_ID
         })
     });
