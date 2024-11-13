@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { Home, type Icon, ListMusic, Search } from "lucide-svelte";
+  import { Home, type Icon, ListMusic, Menu, Search, X } from "lucide-svelte";
   import { tick, type ComponentType } from "svelte";
   import logo from "../../assets/apple-music.svg";
   import { page } from "$app/stores";
   import { fade } from "svelte/transition";
   import { beforeNavigate } from "$app/navigation";
+  import IconButton from "./IconButton.svelte";
 
   export let desktop: boolean;
 
@@ -22,19 +23,19 @@
 
   $: isOpen = desktop || isMobileMenuOpen;
 
-  let openMenuButton: HTMLButtonElement;
-  let closeMenuButton: HTMLButtonElement;
+  let openMenuButton: IconButton;
+  let closeMenuButton: IconButton;
   let lastFocusableElement: HTMLAnchorElement;
 
   const openMenu = async () => {
     isMobileMenuOpen = true;
     await tick();
-    closeMenuButton.focus();
+    closeMenuButton.getButton().focus();
   };
 
   const closeMenu = () => {
     isMobileMenuOpen = false;
-    openMenuButton.focus();
+    openMenuButton.getButton().focus();
   };
 
   const moveFocusToBottom = (e: KeyboardEvent) => {
@@ -49,7 +50,7 @@
     if (desktop) return;
     if (e.key === "Tab" && !e.shiftKey) {
       e.preventDefault();
-      closeMenuButton.focus();
+      closeMenuButton.getButton().focus();
     }
   };
   const handleEscape = (e: KeyboardEvent) => {
@@ -61,6 +62,7 @@
   beforeNavigate(() => {
     isMobileMenuOpen = false;
   });
+  console.log(desktop)
 </script>
 
 <svelte:head>
@@ -83,12 +85,19 @@
     ></div>
   {/if}
   <nav aria-label="Main">
-    {#if !desktop}
-      <button
+    {#if !desktop }
+      <!-- <button
         bind:this={openMenuButton}
         on:click={openMenu}
-        aria-expanded={isOpen}>Open</button
-      >
+        aria-expanded={isOpen}>Open</button -->
+      <IconButton
+        icon={Menu}
+        label="Open Menu"
+        bind:this={openMenuButton}
+        on:click={openMenu}
+        aria-expanded={isOpen}
+        class="menu-button"
+      />
     {/if}
     <div
       class="nav-content-inner"
@@ -97,11 +106,14 @@
       on:keyup={handleEscape}
     >
       {#if !desktop}
-        <button
-          bind:this={closeMenuButton}
+      <IconButton
+      icon={X}
+      label="Close Menu"
+      bind:this={closeMenuButton}
           on:click={closeMenu}
-          on:keydown={moveFocusToBottom}>Close</button
-        >
+          on:keydown={moveFocusToBottom}
+          class='close-menu-button'
+      />
       {/if}
       <img src={logo} alt="music" />
       <ul>
@@ -206,6 +218,9 @@
           display: block;
         }
       }
+      .bars{
+        display: none;
+      }
     }
     &.mobile .nav-content-inner {
       position: fixed;
@@ -225,6 +240,16 @@
       @include breakpoint.down("md") {
         display: block;
       }
+    }
+    :global(.menu-button){
+        @include breakpoint.up('md'){
+            display: none;
+        }
+    }
+    :global(.close-menu-button){
+        position: absolute;
+        right: 20px;
+        top:20px;
     }
   }
 </style>
