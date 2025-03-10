@@ -1,3 +1,5 @@
+// @use '_functions';
+// @use '@unsass/breakpoint';
 @import 'tippy-theme';
 
 :root{
@@ -75,4 +77,12 @@ a {
 
 #nprogress .bar{
 	background-color:#f74c64 !important
+}
+
+.grid-items {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	justify-content: flex-start;
+	align-items: center;
 }

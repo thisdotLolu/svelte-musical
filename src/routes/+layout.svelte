@@ -34,8 +34,6 @@
 </svelte:head>
 
 
-
-
 <div id="main">
   {#if user}
     <div id="sidebar">
