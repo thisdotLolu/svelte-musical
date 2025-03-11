@@ -20,7 +20,7 @@
 
 <button bind:this={button} on:click on:mouseover on:focus on:keydown {...$$restProps}>
     <svelte:component this={icon}
-    color="var(--text-color)"
+    color="#ff758c"
     ></svelte:component>
     <span class='visually-hidden'>{label}</span>
 </button>

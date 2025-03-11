@@ -81,8 +81,9 @@ import Navigation from "./Navigation.svelte";
             margin-right: 10px;
         }
         &:hover{
-            background-color: black;
+            background-color: #ff758c;
             color: white;
+        border: 1px solid #ff758c;
         }
     }
     .profile-menu-content{
@@ -109,7 +110,7 @@ import Navigation from "./Navigation.svelte";
                     border: none;
                     text-decoration: none;
                     cursor: pointer;
-                    color: black;
+                    color: #000;
                     width: 100%;
                     text-align: left;
                     font-size: 14px;

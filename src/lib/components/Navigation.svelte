@@ -121,7 +121,7 @@
           {@const iconProps = {
             focusable: "false",
             "aria-hidden": true,
-            color: "black",
+            color:'#ff758c',
             size: 26,
             strokeWidth: 2,
           }}
@@ -132,7 +132,8 @@
                 href={item.path}
                 on:keydown={moveFocusToTop}
               >
-                <svelte:component this={item.icon} {...iconProps} />
+                <svelte:component 
+                this={item.icon} {...iconProps} />
                 {item.label}
               </a>
             {:else}
