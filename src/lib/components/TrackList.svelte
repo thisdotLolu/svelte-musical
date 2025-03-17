@@ -1,6 +1,7 @@
 <script lang="ts">
   import msToTime from '$lib/helpers/ms-to-time';
 	import { Clock8, ListPlus } from 'lucide-svelte';
+  import Player from './Player.svelte';
 
 	export let tracks: SpotifyApi.TrackObjectFull[] | SpotifyApi.TrackObjectSimplified[];
 </script>
@@ -23,7 +24,11 @@
 		<div class="row">
 			<div class="number-column">
 				<span class="number">{index + 1}</span>
+				<div class="player">
+				<Player track={track}/>
+				</div>
 			</div>
+			
 			<div class="info-column">
 				<div class="track-title">
 					<h4>{track.name}</h4>
