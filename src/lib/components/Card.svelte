@@ -24,7 +24,7 @@
     {/if}
     <h4><a href="/{item.type}/{item.id}">{item.name.length > 15 ? `${item.name.substring(0,15)}...` :item.name}</a></h4>
     {#if item.type === 'album'}
-    <p>{item.artists.map(item => item.name).join(', ')}</p>
+    <p>{item.artists.map(item => item.name).join(', ').length > 20 ? `${item.artists.map(item => item.name).join(', ').substring(0,30)}...`:item.artists.map(item => item.name).join(', ')}</p>
     {/if}
     <!-- {#if} -->
 </div>
@@ -36,7 +36,7 @@
         box-shadow: 0 0 40px rgba(0,0,0,0.4);
         border-radius: 4px;
         transition: background 0.3s;
-        height: 250px;
+        height: 270px;
         position: relative;
        
 
