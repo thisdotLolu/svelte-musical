@@ -4,6 +4,7 @@
 
 <script lang='ts'>
   import { Pause, Play } from "lucide-svelte";
+  import { createEventDispatcher } from "svelte";
 
   type Track = SpotifyApi.TrackObjectFull | SpotifyApi.TrackObjectSimplified;
   export let track: Track;
@@ -12,6 +13,7 @@
   let paused = true;
   let previewUrl: string | null = track.preview_url || null;
   console.log(track)
+  const dispatch = createEventDispatcher<{play: {track:Track}; pause:{track:Track}}>();
 
   async function fetchPreviewUrl() {
       if (!previewUrl) {
@@ -36,9 +38,12 @@
           current.pause();
       }
       current = audio;
+      dispatch('play', {track})
   }
 
-  function onPause() {}
+  function onPause() {
+
+  }
 
   console.log("Preview URL:", previewUrl);
 </script>

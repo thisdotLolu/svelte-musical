@@ -25,7 +25,14 @@
 			<div class="number-column">
 				<span class="number">{index + 1}</span>
 				<div class="player">
-				<Player track={track}/>
+				<Player 
+				on:play={(e)=>{
+					console.log(e.detail.track)
+				}}
+				on:pause={(e)=>{
+					console.log(e.detail.track)
+				}}
+				track={track}/>
 				</div>
 			</div>
 			
