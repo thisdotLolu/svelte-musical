@@ -2,8 +2,12 @@
   import msToTime from '$lib/helpers/ms-to-time';
 	import { Clock8, ListPlus } from 'lucide-svelte';
   import Player from './Player.svelte';
+  import playingGif from '../../assets/playinggif.gif'
 
 	export let tracks: SpotifyApi.TrackObjectFull[] | SpotifyApi.TrackObjectSimplified[];
+
+	let currentPlaying: string | null = null;
+	let isPaused:boolean = false;
 </script>
 
 <div class="tracks">
@@ -21,34 +25,38 @@
 	</div>
     <hr/>
 	{#each tracks as track, index}
-		<div class="row">
+		<div class="row" class:is-current={currentPlaying === track.id}>
 			<div class="number-column">
 				<span class="number">{index + 1}</span>
-				<div class="player">
-				<Player 
-				on:play={(e)=>{
-					console.log(e.detail.track)
-				}}
-				on:pause={(e)=>{
-					console.log(e.detail.track)
-				}}
-				track={track}/>
-				</div>
+				
 			</div>
 			
 			<div class="info-column">
-				<div class="track-title">
-					<h4>{track.name}</h4>
-					{#if track.explicit}
-						<span class="explicit">Explicit</span>
-					{/if}
+				<div>
+					<div class="track-title">
+						<h4>{track.name}</h4>
+						{#if track.explicit}
+							<span class="explicit">Explicit</span>
+						{/if}
+					</div>
+					<p class="artists">
+						{#each track.artists as artist, artistIndex}
+							<a href="/artist/{artist.id}">{artist.name}</a
+							>{#if artistIndex < track.artists.length - 1}{', '}{/if}
+						{/each}
+					</p>
 				</div>
-				<p class="artists">
-					{#each track.artists as artist, artistIndex}
-						<a href="/artist/{artist.id}">{artist.name}</a
-						>{#if artistIndex < track.artists.length - 1}{', '}{/if}
-					{/each}
-				</p>
+				<div class="player">
+					<Player 
+					on:play={(e)=>{
+						currentPlaying = e.detail.track.id;
+						console.log(e.detail.track)
+					}}
+					on:pause={(e)=>{
+						console.log(e.detail.track)
+					}}
+					track={track}/>
+					</div>
 			</div>
 			<div class="duration-column">
 				<span class="duration">{msToTime(track.duration_ms)}</span>
@@ -99,6 +107,9 @@
 			}
 			.info-column {
 				flex: 1;
+				display: flex;
+				align-items: center;
+				gap: 20px;
 				.track-title {
 					display: flex;
 					align-items: center;

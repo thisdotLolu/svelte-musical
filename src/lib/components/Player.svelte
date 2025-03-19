@@ -42,19 +42,23 @@
   }
 
   function onPause() {
-
+    dispatch('pause', {track})
   }
 
   console.log("Preview URL:", previewUrl);
 </script>
 
 <div class="player">
-    <audio on:play={onPlay} bind:this={audio} bind:paused controls src={previewUrl}></audio>
+    <audio on:play={onPlay} on:pause={onPause} bind:this={audio} bind:paused controls src={previewUrl}></audio>
     <button on:click={() => { paused ? audio.play() : audio.pause(); }}>
         {#if paused}
-            <Play color='var(--text-color2)' focusable='false' aria-hidden />
+            <Play 
+            size={100}
+            color='var(--pink-color)' focusable='false' aria-hidden />
         {:else}
-            <Pause color='var(--text-color2)' focusable='false' aria-hidden />
+            <Pause 
+            size={100}
+            color='var(--pink-color)' focusable='false' aria-hidden />
         {/if}
     </button>
 </div>
@@ -73,8 +77,8 @@
             cursor: pointer;
             :global(svg) {
                 fill: var(--text-color);
-                width: 12px;
-                height: 12px;
+                width: 22px;
+                height: 22px;
             }
         }
     }
