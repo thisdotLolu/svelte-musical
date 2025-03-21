@@ -7,7 +7,7 @@
         button:HTMLButtonAttributes,
         a: HTMLAnchorAttributes
     }
-    type $$Props = ButtonComponentElements & {
+    type $$Props = ButtonComponentElements[Element] & {
         element: Element,
         variant?: 'filled' | 'outline' | 'danger';
         className?:string
