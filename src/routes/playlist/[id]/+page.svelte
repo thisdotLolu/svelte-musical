@@ -2,14 +2,20 @@
     import Button from '../../../lib/components/Button.svelte'
   import ItemPage from "$assets/ItemPage.svelte";
   import TrackList from "$assets/TrackList.svelte";
-  import type { PageData } from "./$types";
+  import type { ActionData, PageData } from "./$types";
+  import { pre } from 'framer-motion/client';
+  import { page } from '$app/stores';
+  import { Heart, HeartIcon } from 'lucide-svelte';
 
     export let data:PageData;
+    export let form: ActionData;
 
     $:console.log("dat",data)
 
     $:playlist = data.playlist;
     $: tracks = data.playlist.tracks;
+    $:currentPage= $page.url.searchParams.get('page') || 1
+    $:isFollowing = data.isFollowing;
     let isLoading = false
 
     console.log("pl",playlist)
@@ -55,6 +61,38 @@ color={null}
         </p>
     </div>
 
+    <div class="playlist-actions">
+        {#if data.user?.id === playlist.owner.id}
+        <Button
+        element='a'
+        variant='outline'
+        >Edit Playlist</Button>
+        {:else if isFollowing !== null}
+        <form
+        class='follow-form'
+        method='POST'
+        action={`?/${isFollowing? 'unfollowPlaylist':'followPlaylist'}`}
+        >
+        <Button
+        element='button'
+        type='submit'
+        variant='outline'
+        >
+        <Heart
+        aria-hidden
+        focusable='false'
+        fill={isFollowing ? 'var(--pink-color)':'none'}
+        />
+        {isFollowing ? 'Unfollow':'Follow'}
+    <span class='visually-hidden'>{playlist.name} playlist</span>
+    </Button>
+    {#if form?.followError}
+    <p class='error'>{form.followError}</p>
+    {/if}
+        </form>
+        {/if}
+    </div>
+
     {#if playlist.tracks.items.length > 0}
     <TrackList tracks={filteredTracks}/>
     {#if tracks.next}
@@ -68,6 +106,18 @@ color={null}
         </Button>
     </div>
     {/if}
+    <div class="pagination">
+        <div class="previous">
+            {#if tracks.previous}
+             <Button variant ='outline' element='a' href="{$page.url.pathname}?{new URLSearchParams({page: `${Number(currentPage) - 1}`}).toString()}"> Previous</Button>
+            {/if}
+        </div>
+        <div class="next">
+            {#if tracks.next}
+             <Button variant ='outline' element='a' href="{$page.url.pathname}?{new URLSearchParams({page: `${Number(currentPage) + 1}`}).toString()}"> Next</Button>
+            {/if}
+        </div>
+    </div>
     {:else}
     <div class='empty-playlist'>
         <p>No items added to this playlist yet.</p>
@@ -113,5 +163,37 @@ color={null}
 	.load-more {
 		padding: 15px;
 		text-align: center;
+		:global(html.no-js) & {
+			display: none;
+		}
+	}
+	.pagination {
+		display: none;
+		margin-top: 40px;
+		justify-content: space-between;
+		:global(html.no-js) & {
+			display: flex;
+		}
+	}
+    .playlist-actions {
+		display: flex;
+		justify-content: flex-end;
+		margin: 10px 0 30px;
+		.follow-form {
+			:global(.button) {
+				display: flex;
+				align-items: center;
+				:global(svg) {
+					margin-right: 10px;
+					width: 22px;
+					height: 22px;
+				}
+			}
+			p.error {
+				text-align: right;
+				color: var(--error);
+				font-size:14px;
+			}
+		}
 	}
 </style>
