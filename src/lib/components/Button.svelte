@@ -16,6 +16,12 @@
     export let element: Element;
     export let variant: 'filled' | 'outline' | 'danger' = 'filled'
     export let className: string = '';
+
+    let node: HTMLAnchorElement | HTMLButtonElement;
+
+    export function focus(){
+        node.focus();
+    }
 </script>
 
 <svelte:element this={element} class="button button-{variant} {className}" on:click {...$$restProps}>

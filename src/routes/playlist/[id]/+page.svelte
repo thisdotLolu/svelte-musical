@@ -6,6 +6,7 @@
   import { pre } from 'framer-motion/client';
   import { page } from '$app/stores';
   import { Heart, HeartIcon } from 'lucide-svelte';
+  import { applyAction, enhance } from '$app/forms';
 
     export let data:PageData;
     export let form: ActionData;
@@ -16,6 +17,8 @@
     $: tracks = data.playlist.tracks;
     $:currentPage= $page.url.searchParams.get('page') || 1
     $:isFollowing = data.isFollowing;
+    let isLoadingFollow= false;
+    let followButton: Button<'button'>
     let isLoading = false
 
     console.log("pl",playlist)
@@ -71,12 +74,24 @@ color={null}
         <form
         class='follow-form'
         method='POST'
-        action={`?/${isFollowing? 'unfollowPlaylist':'followPlaylist'}`}
+        action={`?/${isFollowing? 'unFollowPlaylist':'followPlaylist'}`}
+        use:enhance={()=>{
+            isLoadingFollow = true;
+            return ({result})=>{
+                isLoadingFollow = false;
+                applyAction(result);
+                if(result.type === 'success'){
+                    isFollowing = !isFollowing
+                }
+            }
+        }}
         >
         <Button
+        bind:this={followButton}
         element='button'
         type='submit'
         variant='outline'
+        disabled={isLoadingFollow}
         >
         <Heart
         aria-hidden
