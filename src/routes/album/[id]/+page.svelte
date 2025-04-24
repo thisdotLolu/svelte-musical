@@ -2,7 +2,7 @@
     import { getCopyrightSymbol } from '$lib/helpers';
     import type {PageData} from './$types';
     import {Itempage} from '$lib/components'
-  import TrackList from '$assets/TrackList.svelte';
+  import TrackList from '$components/TrackList.svelte';
     export let data:PageData;
 
     $:album = data.album;

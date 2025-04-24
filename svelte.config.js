@@ -22,8 +22,11 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias:{
-			$assets:'src/lib/components',
-			$actions:'src/lib/actions'
+			$components:'src/lib/components',
+			$actions:'src/lib/actions',
+			$stores:'src/lib/stores',
+			$helpers:'src/lib/helpers',
+			$assets:'src/assets',
 		}
 	}
 };

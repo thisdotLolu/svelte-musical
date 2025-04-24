@@ -5,7 +5,7 @@ import type { PageLoad } from "./$types";
 export const load:PageLoad=async({fetch: _fetch,parent})=>{
     const fetch = (path: string) => fetchRefresh(_fetch, path);
 	const { user } = await parent();
-	const newReleases = fetch('/api/spotify/browse/new-releases?limit=20');
+	const newReleases = fetch('/api/spotify/browse/new-releases?limit=40');
 
 	const catsRes = await fetch(`api/spotify/browse/categories`);
 

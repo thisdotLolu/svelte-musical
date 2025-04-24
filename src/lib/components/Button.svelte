@@ -20,7 +20,7 @@
     let node: HTMLAnchorElement | HTMLButtonElement;
 
     export function focus(){
-        node.focus();
+        node?.focus();
     }
 </script>
 

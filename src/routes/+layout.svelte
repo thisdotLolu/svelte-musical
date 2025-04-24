@@ -7,6 +7,7 @@
   import { page } from "$app/stores";
   import NProgress from 'nprogress';
   import 'nprogress/nprogress.css'
+  import Toasts from "$components/Toasts.svelte";
 
   NProgress.configure({showSpinner:false});
 
@@ -33,6 +34,9 @@
   <title>Musical {$page.data.title?` - ${$page.data.title}`:''}</title>
 </svelte:head>
 
+
+
+<Toasts/>
 
 <div id="main">
   {#if user}

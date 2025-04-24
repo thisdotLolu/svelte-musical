@@ -44,13 +44,13 @@ import type { PageData } from "./$types";
 			<h2 class='section-title'>{section.title}</h2>
 		</div>
 		<div class="left">
-			<Button
+			<!-- <Button
 			element="a"
 			href={section.path}
 			variant='outline'
 			>
 			See All
-		</Button>
+		</Button> -->
 		</div>
 	</div>
 	<div class='grid-items'>

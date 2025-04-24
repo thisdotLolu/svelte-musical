@@ -1,7 +1,7 @@
 <script lang='ts'>
     import Button from '../../../lib/components/Button.svelte'
-  import ItemPage from "$assets/ItemPage.svelte";
-  import TrackList from "$assets/TrackList.svelte";
+  import ItemPage from "$components/ItemPage.svelte";
+  import TrackList from "$components/TrackList.svelte";
   import type { ActionData, PageData } from "./$types";
   import { pre } from 'framer-motion/client';
   import { page } from '$app/stores';
