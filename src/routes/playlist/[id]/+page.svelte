@@ -7,6 +7,7 @@
   import { page } from '$app/stores';
   import { Heart, HeartIcon } from 'lucide-svelte';
   import { applyAction, enhance } from '$app/forms';
+  import { toasts } from '$stores';
 
     export let data:PageData;
     export let form: ActionData;
@@ -43,7 +44,7 @@
         if(res.ok){
             tracks = {...resJSON, items:[...tracks.items, ...resJSON.items]}
         }else{
-            alert(resJSON.error.message || 'Could not load data')
+            toasts.error(resJSON.error.message || 'Could not load data')
         }
         isLoading = false;
     }
@@ -77,12 +78,17 @@ color={null}
         action={`?/${isFollowing? 'unFollowPlaylist':'followPlaylist'}`}
         use:enhance={()=>{
             isLoadingFollow = true;
-            return ({result})=>{
+            return async ({result})=>{
                 isLoadingFollow = false;
-                applyAction(result);
                 if(result.type === 'success'){
+                    await applyAction(result);
                     isFollowing = !isFollowing
+                }else if (result.type === 'failure'){
+                    toasts.error(result.data?.followError as any)
+                }else{
+                    
                 }
+                followButton?.focus()
             }
         }}
         >

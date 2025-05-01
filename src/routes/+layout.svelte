@@ -8,6 +8,7 @@
   import NProgress from 'nprogress';
   import 'nprogress/nprogress.css'
   import Toasts from "$components/Toasts.svelte";
+  import { toasts } from "$stores";
 
   NProgress.configure({showSpinner:false});
 
@@ -37,6 +38,11 @@
 
 
 <Toasts/>
+
+<button
+on:click={()=>toasts.error('Message')}
+>Add Toast
+</button>
 
 <div id="main">
   {#if user}
