@@ -52,7 +52,7 @@
 </script>
 
 <ItemPage title={playlist.name}
-image={playlist.images.length > 0 ? playlist.images[0].url : undefined }
+image={playlist.images && playlist.images.length > 0 ? playlist.images[0].url : undefined }
 type={playlist.type}
 color={null}
 >
@@ -86,7 +86,7 @@ color={null}
                 }else if (result.type === 'failure'){
                     toasts.error(result.data?.followError as any)
                 }else{
-                    
+
                 }
                 followButton?.focus()
             }
@@ -172,6 +172,7 @@ color={null}
 		margin-bottom: 0;
 	}
 	.meta {
+        color:var(--pink-color);
 		font-size: 13px;
 		margin-top: 10px;
 		span {

@@ -30,7 +30,7 @@
 
 <style lang="scss">
 	:global(body) {
-		background-image: linear-gradient(230deg, #000, #fff);
+		background-color: white;
 		height: 100vh;
 	}
 	.wrapper {

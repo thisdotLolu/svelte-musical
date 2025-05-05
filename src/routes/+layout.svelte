@@ -39,10 +39,10 @@
 
 <Toasts/>
 
-<button
+<!-- <button
 on:click={()=>toasts.error('Message')}
 >Add Toast
-</button>
+</button> -->
 
 <div id="main">
   {#if user}

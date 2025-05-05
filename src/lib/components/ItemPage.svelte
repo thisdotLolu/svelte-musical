@@ -19,6 +19,7 @@
             <Music
             focusable='false'
             aria-hidden
+			color='white'
             />
         </div>
         {/if}
@@ -82,6 +83,7 @@
 		.cover {
 			margin-right: 40px;
 			z-index: 10;
+			background-color: #ff758c;
 			@include breakpoint.down('sm') {
 				margin-right: 0;
 				margin-bottom: 30px;
@@ -91,6 +93,7 @@
 				width: 100%;
 				aspect-ratio: 1;
 				object-fit: cover;
+				background-color: #ff758c;
 				box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 				@include breakpoint.up('sm') {
 					width: 230px;

@@ -9,12 +9,12 @@
 </script>
 
 <div class='card {item.type}'>
-    {#if item.images.length > 0}
+    {#if item.images && item.images.length > 0}
     <img
     src={item.images[0].url} alt='{item.type} cover for {item.name}'
     />
     {:else}
-    <div class='cover-placholder'>
+    <div class='cover-placeholder'>
         <Music
         color='#000'
         aria-hidden='true'
@@ -77,7 +77,7 @@
             /* margin: 0 0 20px; */
             aspect-ratio: 1;
         }
-        .cover-placholder{
+        .cover-placeholder{
             width: 100%;
             aspect-ratio: 1;
         }
