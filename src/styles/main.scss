@@ -9,9 +9,24 @@
 	--pink-color:#ff758c;
 }
 
-body{
+body {
     background-color: var(--bg-color);
     color: var(--text-color);
+}
+
+::selection {
+	background-color: var(--text-color2);
+	color: var(--text-color);
+}
+
+input {
+	border: none;
+	padding: 0 20px;
+	height: 35px;
+	border-radius: 20px;
+	font-size:14px;
+	color: var(--text-color2);
+	background-color: #e2dede;
 }
 
 h1,

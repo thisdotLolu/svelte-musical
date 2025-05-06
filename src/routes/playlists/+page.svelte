@@ -37,7 +37,9 @@ async function loadMoreItems(){
     {#if playlists.items.length > 0}
      <div class='title'>
         <h1>{data.title}</h1>
-        <Button element='a'>+ Add New</Button>
+        <Button element='a'
+        href='/playlists/new'
+        >+ Add New</Button>
      </div>
      <div class='grid-items'>
         {#each playlists.items as item}
@@ -53,7 +55,9 @@ async function loadMoreItems(){
     {:else}
     <div class='empty'>
         <p>No Playlists Yet!</p>
-        <Button element='a'>+ Add New</Button>
+        <Button element='a'
+        href='/playlists/new'
+        >+ Add New</Button>
     </div>
     {/if}
 </div>
