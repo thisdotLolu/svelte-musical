@@ -70,6 +70,7 @@ color={null}
         <Button
         element='a'
         variant='outline'
+        href="/playlist/{playlist.id}/edit"
         >Edit Playlist</Button>
         {:else if isFollowing !== null}
         <form

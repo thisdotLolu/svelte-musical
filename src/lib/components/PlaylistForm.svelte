@@ -1,12 +1,14 @@
 <script lang='ts'>
 
 import {Button} from '$components';
+  import type { ActionData as EditActionData } from '../../routes/playlist/[id]/edit/$types';
 import type { ActionData as AddActionData } from '../../routes/playlists/new/$types';
 
 
-export let form: AddActionData;
+export let form: AddActionData | EditActionData;
 export let userID:string | undefined = undefined;
 export let action:string | undefined = undefined;
+export let playlist:SpotifyApi.PlaylistObjectFull | SpotifyApi.PlaylistObjectSimplified | undefined = undefined;
 </script>
 
 <form method='POST' {action}>
@@ -19,7 +21,7 @@ export let action:string | undefined = undefined;
     <div class='field' class:has-error={form?.nameError}>
         <label for="playlist-name">Name *</label>
         <input type='text' id='playlist-name' name='name' placeholder="Playlist Name"
-        value={form?.name || ''}
+        value={form?.name || playlist?.name || ''}
         />
         {#if form?.nameError}
         <p class='error'>{form.nameError}</p>
@@ -28,7 +30,7 @@ export let action:string | undefined = undefined;
     <div class='field'>
         <label for="playlist-description">Description</label>
         <input type='text' id='playlist-description' name='description' placeholder="Playlist Description"
-        value={form?.description || ''}
+        value={form?.description || playlist?.description || ''}
         />
     </div>
     {#if form?.apiError}
@@ -36,7 +38,7 @@ export let action:string | undefined = undefined;
     {/if}
 
     <div class='submit-button'>
-        <Button element='button' type='submit'>Create Playlist</Button>
+        <Button element='button' type='submit'>{playlist? 'Save Playlist':'Create Playlist'}</Button>
     </div>
 </form>
 
