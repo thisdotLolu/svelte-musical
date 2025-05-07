@@ -24,15 +24,16 @@ import type { PageData } from "./$types";
 		}
 
 		// data.homeCategories.forEach((category,index)=>{
-		// 	const categoryPlaylist = data.categoriesPlaylists[index];
-		// 	console.log(categoryPlaylist)
-		// 	if(categoryPlaylist){
-		// 		sections.push({
-		// 			title:category.name,
-		// 			path: `/category/${category.id}`,
-		// 			items: categoryPlaylist.playlists.items
-		// 		})
-		// 	}
+		// 	console.log(category)
+		// 	// const categoryPlaylist = data.categoriesPlaylists[index];
+		// 	// console.log(categoryPlaylist)
+		// 	// if(categoryPlaylist){
+		// 	// 	sections.push({
+		// 	// 		title:category.name,
+		// 	// 		path: `/category/${category.id}`,
+		// 	// 		items: categoryPlaylist.playlists.items
+		// 	// 	})
+		// 	// }
 		// })
 	}
 </script>

@@ -3,17 +3,24 @@ lang='ts'
 >
   import Button from '$components/Button.svelte';
   import Card from '$components/Card.svelte';
+  import Modal from '$components/Modal.svelte';
   import Pagination from '$components/Pagination.svelte';
   import { toasts } from '$stores';
+  import MicroModal from 'micromodal';
 
 import type {PageData} from './$types';
+  import PlaylistForm from '$components/PlaylistForm.svelte';
+  import type { ActionData } from './new/$types';
+  import { createEventDispatcher } from 'svelte';
 
 export let data:PageData;
+export let form:ActionData;
 console.log(data)
 
 let isLoading = false;
 
 $: playlists = data.userPlaylists;
+
 console.log(playlists)
 
 async function loadMoreItems(){
@@ -38,6 +45,10 @@ async function loadMoreItems(){
      <div class='title'>
         <h1>{data.title}</h1>
         <Button element='a'
+        on:click={(e)=>{
+            e.preventDefault();
+            MicroModal.show('add-playlist-modal');
+        }}
         href='/playlists/new'
         >+ Add New</Button>
      </div>
@@ -61,6 +72,17 @@ async function loadMoreItems(){
     </div>
     {/if}
 </div>
+
+<Modal id="add-playlist-modal"
+title="Add a new playlist"
+>
+<PlaylistForm
+on:redirect
+{form}
+userID={data.user?.id}
+action="/playlists/new"
+/>
+</Modal>
 
 <style lang="scss">
 	.content {

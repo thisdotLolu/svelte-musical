@@ -9,6 +9,8 @@
   import 'nprogress/nprogress.css'
   import Toasts from "$components/Toasts.svelte";
   import { toasts } from "$stores";
+  import MicroModal from 'micromodal';
+  import { browser } from "$app/environment";
 
   NProgress.configure({showSpinner:false});
 
@@ -27,6 +29,11 @@
   afterNavigate(()=>{
     NProgress.done();
   })
+  
+  if(browser){
+    MicroModal.init();
+  }
+  
 </script>
 
 <svelte:window bind:scrollY/>
