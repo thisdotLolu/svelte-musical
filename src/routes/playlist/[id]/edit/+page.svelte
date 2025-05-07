@@ -8,6 +8,8 @@
   export let data: PageData;
   $:playlist = data.playlist;
 
+  $:console.log(form)
+
 </script>
 <h2>{data.title}</h2>
 
