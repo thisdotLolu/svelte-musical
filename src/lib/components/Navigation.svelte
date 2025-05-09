@@ -8,6 +8,8 @@
   import IconButton from "./IconButton.svelte";
 
   export let desktop: boolean;
+  export let userAllPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined =
+    undefined;
 
   const menuItems: {
     path: string;
@@ -115,6 +117,7 @@
           class='close-menu-button'
       />
       {/if}
+      <div class="logo-and-menu">
       <img src={logo} alt="music" />
       <ul>
         {#each menuItems as item, index}
@@ -146,6 +149,19 @@
         {/each}
       </ul>
     </div>
+    {#if userAllPlaylists && userAllPlaylists.length > 0}
+    <hr/>
+    <div class='all-playlists'>
+      <ul>
+        {#each userAllPlaylists as playlist}
+        <li class:active={$page.url.pathname === `/playlist/${playlist.id}`}>
+        <a href='/playlist/{playlist.id}'>{playlist.name}</a>
+        </li>
+        {/each}
+      </ul>
+    </div>
+    {/if}
+  </div>
   </nav>
 </div>
 

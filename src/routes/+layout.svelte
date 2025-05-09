@@ -21,6 +21,7 @@
 
 
   $: user = data.user;
+  $: userAllPlaylists = data.userAllPlaylists;
 
   beforeNavigate(()=>{
     NProgress.start()
@@ -29,7 +30,7 @@
   afterNavigate(()=>{
     NProgress.done();
   })
-  
+
   if(browser){
     MicroModal.init();
   }
@@ -54,15 +55,17 @@ on:click={()=>toasts.error('Message')}
 <div id="main">
   {#if user}
     <div id="sidebar">
-      <Navigation desktop={true} />
+      <Navigation desktop={true} 
+      {userAllPlaylists}/>
     </div>
   {/if}
   <div id="content">
     {#if user}
     <div id="topbar" bind:this={topbar}>
       <div class="topbar-bg"></div>
-      <Header/>
-    </div>
+      <Header 
+      {userAllPlaylists}/>
+    </div>  
     {/if}
     <main id="main-content">
       <slot />

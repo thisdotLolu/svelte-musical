@@ -6,12 +6,14 @@ import Navigation from "./Navigation.svelte";
   import LogoutButton from "./LogoutButton.svelte";
 
   $: user = $page.data.user;
+  export let userAllPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined = undefined;
 
 </script>
 <div class="content">
     <div class="left">
         <Navigation
         desktop={false}
+        {userAllPlaylists}
         />
     </div>
     <div class="right">

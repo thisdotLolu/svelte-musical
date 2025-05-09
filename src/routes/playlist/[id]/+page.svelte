@@ -12,7 +12,7 @@
   import PlaylistForm from '$components/PlaylistForm.svelte';
   import Modal from '$components/Modal.svelte';
   import MicroModal from 'micromodal';
-  import { invalidate } from '$app/navigation';
+  import { invalidate, invalidateAll } from '$app/navigation';
 
     export let data:PageData;
     export let form: ActionData | EditActionData;
@@ -173,7 +173,7 @@ title='Edit {playlist.name}'
     form={form && 'editForm' in form ? form : null}
     on:success={()=>{
         MicroModal.close('edit-playlist-modal')
-        invalidate(`api/spotify/playlists/${playlist.id}`)
+        invalidateAll()
     }}
     />
 </Modal>
