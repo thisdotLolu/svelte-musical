@@ -3,7 +3,6 @@
 	import { Clock8, ListPlus, ListX } from 'lucide-svelte';
   import Player from './Player.svelte';
   import playingGif from '../../assets/playinggif.gif'
-  import { style } from 'framer-motion/client';
   import { tippy } from '$actions';
   import Button from './Button.svelte';
   import { page } from '$app/stores';

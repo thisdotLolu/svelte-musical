@@ -4,7 +4,6 @@
   import TrackList from "$components/TrackList.svelte";
   import type { ActionData, PageData } from "./$types";
   import type { ActionData as EditActionData } from "./edit/$types";
-  import { pre } from 'framer-motion/client';
   import { page } from '$app/stores';
   import { Heart, HeartIcon } from 'lucide-svelte';
   import { applyAction, enhance } from '$app/forms';
