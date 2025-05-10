@@ -125,7 +125,10 @@ color={null}
     </div>
 
     {#if playlist.tracks.items.length > 0}
-    <TrackList tracks={filteredTracks}/>
+    <TrackList 
+    userPlaylists={data.userAllPlaylists?.filter(pl => pl.owner.id === data.user?.id)}
+    isOwner={data.user?.id === playlist.owner.id}
+    tracks={filteredTracks}/>
     {#if tracks.next}
     <div class="load-more">
         <Button
