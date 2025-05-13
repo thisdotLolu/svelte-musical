@@ -4,6 +4,11 @@
     type AlbumType = SpotifyApi.AlbumObjectFull | SpotifyApi.AlbumObjectSimplified;
     type PlaylistType = SpotifyApi.PlaylistObjectFull | SpotifyApi.PlaylistObjectSimplified;
     type ArtistType = SpotifyApi.ArtistObjectFull;
+    const followersFormat = Intl.NumberFormat('en-US', {
+      notation: 'compact',
+      compactDisplay: 'short',
+      maximumFractionDigits: 1
+    });
 
     export let item : AlbumType | PlaylistType | ArtistType;
 </script>
@@ -26,7 +31,9 @@
     {#if item.type === 'album'}
     <p>{item.artists.map(item => item.name).join(', ').length > 20 ? `${item.artists.map(item => item.name).join(', ').substring(0,30)}...`:item.artists.map(item => item.name).join(', ')}</p>
     {/if}
-    <!-- {#if} -->
+    {#if item.type === 'artist'}
+    <p class="truncate-1">{followersFormat.format(item.followers.total)} Followers</p>
+    {/if}
 </div>
 
 <style lang='scss'>
@@ -38,7 +45,7 @@
         transition: background 0.3s;
         height: 270px;
         position: relative;
-       
+        
 
         h4{
             font-size: 1rem;
