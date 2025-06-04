@@ -4,6 +4,7 @@
 import Navigation from "./Navigation.svelte";
   import { tippy } from "$actions";
   import LogoutButton from "./LogoutButton.svelte";
+  import SearchForm from "./SearchForm.svelte";
 
   $: user = $page.data.user;
   export let userAllPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined = undefined;
@@ -15,6 +16,11 @@ import Navigation from "./Navigation.svelte";
         desktop={false}
         {userAllPlaylists}
         />
+        {#if $page.url.pathname.startsWith('/search')}
+        <div class="search-form">
+            <SearchForm/>
+        </div>
+        {/if}
     </div>
     <div class="right">
         <div id="profile-button">
@@ -57,6 +63,12 @@ import Navigation from "./Navigation.svelte";
 </div>
 
 <style lang="scss">
+    .search-form{
+        display: none;
+        @include breakpoint.up('lg'){
+            display: block;
+        }
+    }
 	.content {
 		display: flex;
 		justify-content: space-between;
